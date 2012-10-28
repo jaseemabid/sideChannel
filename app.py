@@ -1,5 +1,7 @@
+#! /usr/bin/env python3
+
 import wave
-w = wave.open('left.wav', 'r')
+w = wave.open('./assets/left.wav', 'r')
 
 def getWaveInfo(w):
         """
