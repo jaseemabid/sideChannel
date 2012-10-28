@@ -1,9 +1,8 @@
-sideChannel
-===========
+## sideChannel
 
 Simple demo of side channel attack in python
 
-# Input Keystrokes :
+### Input Keystrokes :
 
 	q X 10 times
 	c X 10 times
