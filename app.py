@@ -7,6 +7,11 @@ import array
 
 import matplotlib.pyplot as plt
 
+# Global variables
+
+samples = []
+
+
 def getWaveInfo(w):
         """
 
@@ -22,15 +27,6 @@ def getWaveInfo(w):
 
 def plotWave(w):
 
-        nchannels, sampwidth, framerate, nframes, comptype, compname = w.getparams()
-
-        # Read the whole WAV at once
-        frames = w.readframes(nframes)
-        w.close()
-
-        # Convert to 16bit samples
-        samples = array.array("h", frames)
-
         plt.plot(samples)
         plt.ylabel('Amplitude')
         plt.show()
@@ -39,6 +35,16 @@ def plotWave(w):
 def main():
 
         w = wave.open('./assets/left.wav', 'r')
+
+        nchannels, sampwidth, framerate, nframes, comptype, compname = w.getparams()
+
+        # Read the whole WAV at once
+        frames = w.readframes(nframes)
+        w.close()
+
+        # Convert to 16bit samples
+        global samples
+        samples = array.array("h", frames)
 
         getWaveInfo(w)
         plotWave(w)
