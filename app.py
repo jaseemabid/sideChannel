@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 # Global variables
 
 samples = []
+peakY = []
+peakX = []
 
 
 def getWaveInfo(w):
@@ -32,6 +34,23 @@ def plotWave(w):
         plt.show()
 
 
+def findPeaks():
+        LEFT_MIN_AMP = 2000
+        WAVE_PEAK_TIME = 44100 * 10/1000 # 100ms
+
+        global peakY
+        global peakX
+
+        index = 0
+
+        while index < len(samples):
+                if samples[index] > LEFT_MIN_AMP :
+                        tempRange = samples[index: index + WAVE_PEAK_TIME]
+                        peakY.append(max(tempRange))
+                        peakX.append(index)
+                        index = index + 44100 # Skip a sec after a hit
+                index = index + 1
+
 def main():
 
         w = wave.open('./assets/left.wav', 'r')
@@ -47,6 +66,7 @@ def main():
         samples = array.array("h", frames)
 
         getWaveInfo(w)
+        findPeaks()
         plotWave(w)
 
 if __name__ == "__main__" :
